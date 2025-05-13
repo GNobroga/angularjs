@@ -19,6 +19,7 @@
   "homepage": "https://github.com/GNobroga/angularjs#readme",
   "description": "",
   "dependencies": {
+    "@types/angular": "^1.8.9",
     "angular": "^1.8.2",
     "bootstrap": "^5.3.6",
     "css-loader": "^7.1.2",
@@ -28,5 +29,9 @@
     "webpack": "^5.99.8",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.1"
+  },
+  "devDependencies": {
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.3"
   }
 }

@@ -46,3 +46,16 @@ Filtros são os `pipes` do Angular 2+.
         ]
     });
 ```
+
+## Create a Filter
+
+Transform o resultado de uma expressão, realizando operações como formatação de data, a conversão de moeda e a ordenação de Array.
+
+
+```js
+    angular.module('App').filter('myFilter', function() {
+        return function (input) {
+            
+        }
+    });
+```

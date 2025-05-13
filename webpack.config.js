@@ -17,8 +17,16 @@ module.exports = {
             {
                 test: /\.html$/,  
                 use: 'html-loader'
-            }
+            },
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
         ]
+    },
+    resolve: {
+        extensions: ['.ts', '.js'],
     },
     devServer: {
         static: './src',
