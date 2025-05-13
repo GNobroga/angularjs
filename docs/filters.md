@@ -54,8 +54,8 @@ Transform o resultado de uma expressão, realizando operações como formataçã
 
 ```js
     angular.module('App').filter('myFilter', function() {
-        return function (input) {
-            
+        return function (input, arg2, arg3) {
+            return input + "Filtered";
         }
     });
 ```

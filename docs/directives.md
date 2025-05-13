@@ -1,5 +1,7 @@
 ## Directives
 
+Diretivas permitem adicionar comportamento extra a um elemento, semelhante ao Angular 2+.
+
 - **ng-controller:** é usada para associar um controlador a um elemento HTML (geralmente a uma seção específica de sua página). Isso significa que a lógica e os dados definidos no controlador estarão disponíveis para os elementos HTML dentro desse escopo.
 
 ```html
@@ -116,11 +118,174 @@
 
 **ng-required:** 
 
-
 ```html
     <form name="contactForm">
         <input type="text" name="name" ng-required="true">
     </form>
 
    Is valid {{ contactForm.$invalid}} ?
+```
+
+## Create a Directive
+
+
+### Chapter 1
+
+- **template:** Parecido com template no Angular 2+
+
+- **templateUrl:** Permite especificar um arquivo pra ser o template da diretiva.
+
+- **replace:** Substitui o elemento original pelo template
+
+- **restrict:** Restringe o modo de utilização da diretiva ao atributo, elemento, classe e comentário ou ainda uma combinação deles. Caso não seja definido, o padrão é que a diretiva seja atribuída pelo atributo.
+
+
+```js
+    // A - Atributo
+    // E - Elemento
+    // C - Classe 
+    // M - Comentário
+```
+
+```js
+
+    // Diretiva de elementos
+    angular.module('myApp', [])
+        .directive('minhaDiretiva', function() {
+            return {
+            restrict: 'AE', // Tipo de uso: E = elemento, A = atributo, C = classe, M = comentário
+            template: '<h3>Olá, sou uma diretiva!</h3>'
+        };
+  });
+
+    // Diretiva de atributos
+    angular.module('myApp', [])
+        .directive('destaque', function() {
+            return {
+                tempalate: '<div>{{ name }}</div>',
+                restrict: 'E', // A = atributo,
+                scope: {
+                    name: 'Hello World',
+                }
+            }
+        };
+    );
+
+
+```
+
+Por padrão, uma diretiva compartilha o mesmo scope de onde é utilizada, ou seja, do controller no qual ela está sendo utilizada.
+
+A propriedade `$id` permite identificar o scope.
+
+```html
+    <div>{{ $id }}</div>
+```
+
+Caso eu defina um scope na diretiva, o padrão será substituído.
+
+```js
+
+    <div my-directive title="hello world">
+
+    </div>
+
+    // view/alert.html
+    <div>
+        {{ title }}
+    </div>
+
+    // Novo scope
+    angular.module('myApp', [])
+        .directive('myDirective', function() {
+            return {
+                templateUrl: 'view/alert.html',
+                replace: true,
+                scope: {
+                    topic: '@title' // Isso vincula o atributo passado na diretiva com essa propriedade no scope, ou seja, o valor de topic é o valor do title que foi passado no atributo da diretiva.,
+                    title: '@' // Se o atributo de propriedade foram iguais eu posso utilizar esse shorthand, pra ligar os dois.,
+                    property: '=attribute' // faz o Two-way-databinding
+                }
+            }
+        };
+    );
+```
+
+`@` Vincula o valor do a tributo diretamente a uma propriedade do scope da diretiva.
+
+`=` Cria um vínculo bi-direcional entre uma propriedade do scope do template a uma propriedade do scope da diretiva, é o famoso **two-way-databinding**.
+
+- **tansclude:** Permite projetar conteúdo para dentro do template da diretiva, ele usa o scopo externo.
+
+```html
+    <!-- Usando a diretiva my-directive  -->
+    <div my-directive title="hello world">
+        <span>Hello World, I am here!</span>
+    </div>
+
+
+    <!-- Agora dentro da diretiva, isso fará a projeção do conteúdo -->
+    <div ng-transclude></div>
+```
+
+### Chapter 2
+
+- **link:** Executada depois do template ter sido compilado, podemos utilizá-lo para interagir com a DOM, tratando eventos ou mesmo para definir o comportamento associado com a lógica da diretiva.
+
+
+- **require:** Permite ter acesso a outra diretiva dentro de uma diretiva.
+
+```js
+    angular.module('App', [])
+        .directive('myDirective', function() {
+            return {
+                // scope por padrão é o mesmo do controller caso a diretiva não tenha um scope isolado.
+               required: 'ngModel',
+               link: function($scope, element, attrs, ctrl) {
+                    element.bind('keyup', function () {
+                        // ctrl.$setViewValue()
+                        // console.log(ctrl.$viewValue)
+                        //ctrl.$render() // vai renderizar o nome valor setado no ngModel
+
+                        // ctrl.$parsers.push(function (value) { // Permite adicionar interceptores para manipular o value antes de ir pro scope do ngModel. 
+                        //  return value;
+                        //})
+                    }); 
+               }
+            }
+        };
+    );
+```
+
+
+- **controller** O controller em uma diretiva é uma função JavaScript (tipo factory/construtor) que pode expor uma API pública (via this) para ser usada por outras diretivas (via require), ou pela própria diretiva.
+
+```js
+    // Diretiva pai
+    angular.module('App', [])
+        .directive('myFather', function() {
+            return {
+                // scope por padrão é o mesmo do controller caso a diretiva não tenha um scope isolado.
+                controller: function ($scope, $element, $attrs) {
+                    this.helloWorld = function() {
+                        console.log('oii');
+                    };
+                }
+               
+            }
+        };
+    );
+
+
+     angular.module('App', [])
+        .directive('myFather', function() {
+            return {
+                // scope por padrão é o mesmo do controller caso a diretiva não tenha um scope isolado.
+                require: '^myFather',
+                link: function(scope, element, attrs, fatherCtrl) {
+                    fatherCtrl.digaOi(); // chama função exposta pelo controller da diretiva pai
+                }
+            }
+        };
+    );
 ```

@@ -1,8 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+
 const path = require('path');
 
 module.exports = {
-    entry: './app/js/app.js',
+    entry: './app/js/app.ts',
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
@@ -34,7 +36,12 @@ module.exports = {
         port: 4200,
     },
     plugins: [
-        new HtmlWebpackPlugin({ template: './src/index.html' })
+        new HtmlWebpackPlugin({ template: './app/index.html' }),
+          new CopyPlugin({
+            patterns: [
+                { from: 'public', to: '', noErrorOnMissing: true } 
+            ]
+        })
     ],
     mode: 'development'
 };
