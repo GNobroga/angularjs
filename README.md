@@ -10,7 +10,7 @@ Meus estudos relacionados ao AngularJS
 - [Filtros](/docs/filters.md)
 - [Serviços](/docs/services.md)
 - [Routes](/docs/routes.md)
-- [Ir para a documentação do AngularJS](https://docs.angularjs.org/tutorial)
+- [Ir para a documentação do AngularJS](https://code.angularjs.org/snapshot-stable/docs/guide)
 
 ## Tecnologias
 
