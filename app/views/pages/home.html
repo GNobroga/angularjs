@@ -21,21 +21,20 @@
         <md-card-title style="font-size: 1.2rem; font-weight: bold;">My Tasks</md-card-title>
         <md-card-content>
             <task-input on-add="$ctrl.addTask(description)"></task-input>
-            <div class="message" layout="column" layout-align="center center" layout-margin="0">
+            <div ng-if="!$ctrl.tasks.length" class="message" layout="column" layout-align="center center" layout-margin="0">
                     <span class="message__title">Nenhuma tarefa adicionada ainda.</span>
                     <span class="message__subtitle">Adicione sua primeira tarefa acima!</span>
             </div>
-            <md-content>
-                   <md-list layout="column" layout-margin>
-                    <md-list-item ng-repeat="task in $ctrl.tasks" class="md-3-line">
-                        <div class="md-list-item-text md-padding md-shadow" style="background-color: #eee;" layout="column">
-                            <h4 class="md-body-1">#{{ task.id }}</h4>
-                            <p class="md-subhead">{{ task.description }}</p>
-                        </div>
-                    </md-list-item>
-                    <md-divider ng-if="!$last"></md-divider>
-                </md-list>
-            </md-content>
+
+            <div ng-repeat="task in $ctrl.tasks" layout="row" layout-align="space-between center">
+                <div>
+                    <h4 class="md-title">#{{ task.id }}</h4>
+                    <p class="md-subhead">{{ task.description }}</p>
+                    </div>
+                <md-button class="md-raised md-warn"  ng-click="$ctrl.removeTask(task.id)">Remover</md-button>
+            </div>
+        
+         
         </md-card-content>
     </md-card>
 

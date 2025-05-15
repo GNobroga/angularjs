@@ -5,7 +5,7 @@ angular.module('app').controller('HomeController', ['$scope', '$timeout', '$q', 
     function($scope: IScope, $timeout: ITimeoutService, $q: IQService, taskService: ITaskService) {
      
         this.tasks = [];
-        
+
         const loadTasks = () => {
             taskService.listAll().then(tasks => {
                this.tasks = tasks;
@@ -19,6 +19,12 @@ angular.module('app').controller('HomeController', ['$scope', '$timeout', '$q', 
                 loadTasks();
             });
         };
+
+        this.removeTask = function (id: string) {
+            if (taskService.deleteById(id)) {
+                loadTasks();
+            } 
+        }
 
     
 }]);
