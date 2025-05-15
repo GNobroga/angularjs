@@ -17,4 +17,4 @@ Meus estudos relacionados ao AngularJS
 - AngularJs
 - Webpack
 - Typescript
-- Bootstrap 
+- Angular Material
