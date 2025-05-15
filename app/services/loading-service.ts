@@ -4,6 +4,7 @@ import app from "../app";
 export interface ILoadingService {
     hide(): void;
     show(): void;
+    isLoading(): boolean;
 }
 
 app.factory('loadingService', function () {
@@ -15,6 +16,9 @@ app.factory('loadingService', function () {
 
         show() {
             this.loading = true;
+        },
+        isLoading() {
+            return this.loading;
         }
     };
 });
