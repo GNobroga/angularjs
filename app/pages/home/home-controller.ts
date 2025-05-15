@@ -1,10 +1,13 @@
 import angular, { IQService, IScope, ITimeoutService } from "angular";
+import { StateParams, StateService } from "angular-ui-router";
 import { ITaskService } from "../../services/task-service";
 
-angular.module('app').controller('HomeController', ['$scope', '$timeout', '$q', 'taskService', 
-    function($scope: IScope, $timeout: ITimeoutService, $q: IQService, taskService: ITaskService) {
+angular.module('app').controller('HomeController', ['$scope', '$timeout', '$q', 'taskService', '$stateParams', '$state', 
+    function($scope: IScope, $timeout: ITimeoutService, $q: IQService, taskService: ITaskService, $stateParams: StateParams, $state: StateService) {
      
         this.tasks = [];
+
+        console.log($stateParams)
 
         const loadTasks = () => {
             taskService.listAll().then(tasks => {

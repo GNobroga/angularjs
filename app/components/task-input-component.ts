@@ -10,6 +10,7 @@ app.component('taskInput', {
         this.add = function () {
             if (this.form.$valid) {
                 this.onAdd( { description: this.description });
+                this.description = '';
             }
         }
     }
