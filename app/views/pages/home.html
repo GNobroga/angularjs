@@ -1,0 +1,28 @@
+<style>
+    .container {
+        max-width: 50vw;
+    }
+</style>
+
+
+<div ng-controller="HomeController as $ctrl" class="container">
+    <md-card>
+         <md-card-title>My Tasks</md-card-title>
+        <md-card-content>
+           <task-input></task-input>
+        </md-card-content>
+    </md-card>
+
+    <!-- <div class="container bg-white d-flex justify-content-center pt-5">
+        <div class="card shadow-lg w-100" style="max-width: 500px;">
+            <div class="card-body">
+                <div class="card-title">
+                    <h1 class="fs-4 text-primary">Minhas Tarefas</h1>
+                </div>
+                <div class="mt-3">
+                    <task-input on-add="$ctrl.addTask(description)"/>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

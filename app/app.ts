@@ -1,22 +1,10 @@
-import angular, { route } from "angular";
-import 'angular-route';
-import 'bootstrap/dist/css/bootstrap.css';
-import './style.css';
-import "./modules/login";
-import './modules/shared';
+import angular from "angular";
+import 'angular-ui-router';
+import 'angular-material/angular-material';
+import 'angular-animate/angular-animate';
+import 'angular-aria/angular-aria';
+import 'angular-material/angular-material.css';
 
-const appModule = angular.module('appModule', ['ngRoute', 'loginModule', 'sharedModule']);
+const app = angular.module('app', ['ui.router', 'ngMaterial', 'ngAnimate', 'ngAria']);
 
-appModule.config(['$routeProvider', function ($routeProvider: route.IRouteProvider) {
-    $routeProvider  
-        .when('/', {
-            redirectTo: '/login',
-        })
-        .when('/login', {
-            templateUrl: 'views/login.html',
-        })
-        .when('/sign-up', {
-            templateUrl: 'views/sign-up.html',
-        });
-}]);
-
+export default app;
