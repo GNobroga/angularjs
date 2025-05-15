@@ -6,10 +6,10 @@ app.component('taskInput', {
     bindings: {
         onAdd: '&',
     },
-    controller($scope: IScope & Record<string, any>) {
+    controller() {
         this.add = function () {
-            if ($scope.form.$valid) {
-                this.onAdd( { description: $scope.description });
+            if (this.form.$valid) {
+                this.onAdd( { description: this.description });
             }
         }
     }

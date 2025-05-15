@@ -1,12 +1,16 @@
-<form class="d-flex gap-2" name="form" ng-submit="$ctrl.add()">
-     <div layout="row">
-        <md-input-container class="md-block" layout-fill>
-            <label>Description</label>
-            <input ng-model="description">
-        </md-input-container>
+<form name="$ctrl.form" ng-submit="$ctrl.add()" layout="row" layout-align="start center" layout-padding layout-wrap>
+  
+  <md-input-container layout-fill>
+    <label>Descrição</label>
+    <input ng-model="$ctrl.description" name="description" required>
+  </md-input-container>
 
-        <md-button class="md-raised md-primary">Primary</md-button>
-     </div>
+  <md-button 
+    type="submit"
+    class="md-raised md-primary"
+    flex="none"
+    ng-disabled="form.$invalid">
+    Adicionar
+  </md-button>
+
 </form>
-
-<p id="emailErrors"></p>

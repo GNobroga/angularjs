@@ -16,7 +16,7 @@ export interface Pagination {
 export interface ITaskService {
     save(description: string): Promise<ITask>;
     deleteById(id: string): boolean;
-    listAll(pagination: Pagination): Promise<ITask[]>;
+    listAll(pagination?: Pagination): Promise<ITask[]>;
 }
 
 const tasks = [] as ITask[];
@@ -26,6 +26,8 @@ app.factory('taskService', ['loadingService', 'serialService', '$q', function (l
     return {
         listAll(pagination: Pagination = { page: 1, size: 10 }) {
             const { page, size } = pagination;
+
+            return Promise.resolve(tasks);
         },
         save(description: string) {
             const defer = $q.defer();

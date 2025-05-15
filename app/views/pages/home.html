@@ -1,15 +1,41 @@
 <style>
     .container {
         max-width: 50vw;
+        margin: 0 auto;
+        padding: 0.5rem;
+    }
+
+
+    .message > .message__title {
+        font-size: 14px;
+    }
+
+    .message > .message__subtitle {
+        font-size: 13px;
     }
 </style>
 
 
 <div ng-controller="HomeController as $ctrl" class="container">
     <md-card>
-         <md-card-title>My Tasks</md-card-title>
+        <md-card-title style="font-size: 1.2rem; font-weight: bold;">My Tasks</md-card-title>
         <md-card-content>
-           <task-input></task-input>
+            <task-input on-add="$ctrl.addTask(description)"></task-input>
+            <div class="message" layout="column" layout-align="center center" layout-margin="0">
+                    <span class="message__title">Nenhuma tarefa adicionada ainda.</span>
+                    <span class="message__subtitle">Adicione sua primeira tarefa acima!</span>
+            </div>
+            <md-content>
+                   <md-list layout="column" layout-margin>
+                    <md-list-item ng-repeat="task in $ctrl.tasks" class="md-3-line">
+                        <div class="md-list-item-text md-padding md-shadow" style="background-color: #eee;" layout="column">
+                            <h4 class="md-body-1">#{{ task.id }}</h4>
+                            <p class="md-subhead">{{ task.description }}</p>
+                        </div>
+                    </md-list-item>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-list>
+            </md-content>
         </md-card-content>
     </md-card>
 
