@@ -9,6 +9,7 @@ import './services/loading-service';
 import './services/serial-service';
 import './services/task-service';
 import './components/global-loader-component';
+import './filters/uppercase-filter';
 
 app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider: StateProvider, $urlRouterProvider: UrlRouterProvider) {
     $urlRouterProvider.otherwise('/home');

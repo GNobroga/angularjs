@@ -1,4 +1,9 @@
 <div style="max-width: 600px; margin: auto; padding: 1rem;">
+
+    {{ contact | json }}
+
+    <input type="text" ng-model="contact.name">
+
     <md-card style="border-radius: .05rem; padding: 0.5rem;">
         <md-card-content>
             <div layout="column">
